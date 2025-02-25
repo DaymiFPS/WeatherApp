@@ -31,4 +31,19 @@ object WeatherClient {
             null
         }
     }
+
+    suspend fun getCoordinates(city: String): GeocodingResult? {
+        return try {
+            val response = client.get("https://geocoding-api.open-meteo.com/v1/search") {
+                parameter("name", city)
+                parameter("count", "1")
+                parameter("language", "de")
+                parameter("format", "json")
+            }.body<GeocodingResponse>()
+            response.results.firstOrNull()
+        } catch (e: Exception) {
+            println("Fehler beim Finden der Stadt: ${e.message}")
+            null
+        }
+    }
 }

@@ -12,3 +12,15 @@ data class Hourly(
     val time: List<String>,
     val temperature_2m: List<Float>
 )
+
+@Serializable
+data class GeocodingResponse(
+    val results: List<GeocodingResult>
+)
+
+@Serializable
+data class GeocodingResult(
+    val latitude: Float,
+    val longitude: Float,
+    val name: String
+)
